@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ASTRA DYNE GLOBAL - Secure Access Portal</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="background-grid"></div>
+    <div class="background-gradient"></div>
+    
+    <!-- Main Container -->
+    <div class="container" id="app">
+        
+        <!-- Login Page -->
+        <div class="page active" id="loginPage">
+            <div class="auth-card">
+                <div class="card-header">
+                    <div class="logo-section">
+                        <div class="logo-icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="url(#logoGradient)"/>
+                                <path d="M20 10L30 15V25L20 30L10 25V15L20 10Z" fill="white" opacity="0.2"/>
+                                <defs>
+                                    <linearGradient id="logoGradient" x1="0" y1="0" x2="40" y2="40">
+                                        <stop offset="0%" stop-color="#00f5d4"/>
+                                        <stop offset="100%" stop-color="#00bbf9"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h1 class="logo-text">ASTRA DYNE</h1>
+                    </div>
+                    <p class="subtitle">Secure Access Portal</p>
+                </div>
+
+                <div class="alert" id="loginAlert" style="display: none;"></div>
+
+                <form class="auth-form" id="loginForm" novalidate>
+                    <div class="form-group">
+                        <label for="loginEmail" class="form-label">Email Address</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="email" 
+                                id="loginEmail" 
+                                name="email" 
+                                class="form-input" 
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+                            <span class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M3 5L10 10L17 5M3 5V15H17V5H3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <span class="error-message" id="loginEmailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="loginPassword" class="form-label">Password</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="loginPassword" 
+                                name="password" 
+                                class="form-input" 
+                                placeholder="Enter your password"
+                                autocomplete="current-password"
+                                required
+                            >
+                            <span class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 9V6C5 3.79086 6.79086 2 9 2H11C13.2091 2 15 3.79086 15 6V9M4 9H16C17.1046 9 18 9.89543 18 11V16C18 17.1046 17.1046 18 16 18H4C2.89543 18 2 17.1046 2 16V11C2 9.89543 2.89543 9 4 9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <button type="button" class="toggle-password" id="toggleLoginPassword">
+                                <svg class="eye-open" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 4C5 4 2 10 2 10C2 10 5 16 10 16C15 16 18 10 18 10C18 10 15 4 10 4Z" stroke="currentColor" stroke-width="1.5"/>
+                                    <circle cx="10" cy="10" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                                <svg class="eye-closed" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+                                    <path d="M3 3L17 17M10 7C11.6569 7 13 8.34315 13 10C13 10.3453 12.9402 10.6768 12.8293 10.9854M6.5 6.5C5.56566 7.35528 4.81216 8.4591 4.32843 9.82843C3.89052 11.0569 4.32843 11.8284 5.5 12.5C6.67157 13.1716 8.22876 13.5 10 13.5C11.0775 13.5 12.0698 13.3642 12.9354 13.1213" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <span class="error-message" id="loginPasswordError"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="loginBtn">
+                        <span class="btn-text">Sign In</span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg class="spinner" width="20" height="20" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="40" stroke-dashoffset="10"/>
+                            </svg>
+                        </span>
+                    </button>
+                </form>
+
+                <div class="card-footer">
+                    <p class="footer-text">Don't have an account? <a href="#" class="link" id="goToRegister">Create Account</a></p>
+                </div>
+            </div>
+
+            <div class="security-badge">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 1L14 3V8C14 11.5 11.5 14 8 15C4.5 14 2 11.5 2 8V3L8 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 8L7.5 9.5L10 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>256-bit SSL Encrypted</span>
+            </div>
+        </div>
+
+        <!-- Register Page -->
+        <div class="page" id="registerPage">
+            <div class="auth-card">
+                <div class="card-header">
+                    <div class="logo-section">
+                        <div class="logo-icon">
+                            <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                                <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="url(#logoGradient2)"/>
+                                <path d="M20 10L30 15V25L20 30L10 25V15L20 10Z" fill="white" opacity="0.2"/>
+                                <defs>
+                                    <linearGradient id="logoGradient2" x1="0" y1="0" x2="40" y2="40">
+                                        <stop offset="0%" stop-color="#00f5d4"/>
+                                        <stop offset="100%" stop-color="#00bbf9"/>
+                                    </linearGradient>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h1 class="logo-text">ASTRA DYNE</h1>
+                    </div>
+                    <p class="subtitle">Create Your Account</p>
+                </div>
+
+                <div class="alert" id="registerAlert" style="display: none;"></div>
+
+                <form class="auth-form" id="registerForm" novalidate>
+                    <div class="form-group">
+                        <label for="registerName" class="form-label">Full Name</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="text" 
+                                id="registerName" 
+                                name="name" 
+                                class="form-input" 
+                                placeholder="Enter your full name"
+                                autocomplete="name"
+                                required
+                            >
+                            <span class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 10C12.2091 10 14 8.20914 14 6C14 3.79086 12.2091 2 10 2C7.79086 2 6 3.79086 6 6C6 8.20914 7.79086 10 10 10Z" stroke="currentColor" stroke-width="1.5"/>
+                                    <path d="M3 18C3 14.134 6.13401 11 10 11C13.866 11 17 14.134 17 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <span class="error-message" id="registerNameError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerEmail" class="form-label">Email Address</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="email" 
+                                id="registerEmail" 
+                                name="email" 
+                                class="form-input" 
+                                placeholder="Enter your email"
+                                autocomplete="email"
+                                required
+                            >
+                            <span class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M3 5L10 10L17 5M3 5V15H17V5H3Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <span class="error-message" id="registerEmailError"></span>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerPassword" class="form-label">Password</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="registerPassword" 
+                                name="password" 
+                                class="form-input" 
+                                placeholder="Create a strong password"
+                                autocomplete="new-password"
+                                required
+                            >
+                            <span class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M5 9V6C5 3.79086 6.79086 2 9 2H11C13.2091 2 15 3.79086 15 6V9M4 9H16C17.1046 9 18 9.89543 18 11V16C18 17.1046 17.1046 18 16 18H4C2.89543 18 2 17.1046 2 16V11C2 9.89543 2.89543 9 4 9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                            <button type="button" class="toggle-password" id="toggleRegisterPassword">
+                                <svg class="eye-open" width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M10 4C5 4 2 10 2 10C2 10 5 16 10 16C15 16 18 10 18 10C18 10 15 4 10 4Z" stroke="currentColor" stroke-width="1.5"/>
+                                    <circle cx="10" cy="10" r="2" stroke="currentColor" stroke-width="1.5"/>
+                                </svg>
+                                <svg class="eye-closed" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+                                    <path d="M3 3L17 17M10 7C11.6569 7 13 8.34315 13 10C13 10.3453 12.9402 10.6768 12.8293 10.9854M6.5 6.5C5.56566 7.35528 4.81216 8.4591 4.32843 9.82843C3.89052 11.0569 4.32843 11.8284 5.5 12.5C6.67157 13.1716 8.22876 13.5 10 13.5C11.0775 13.5 12.0698 13.3642 12.9354 13.1213" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <span class="error-message" id="registerPasswordError"></span>
+                        <div class="password-strength" id="passwordStrength">
+                            <div class="strength-bar">
+                                <div class="strength-fill" id="strengthFill"></div>
+                            </div>
+                            <span class="strength-text" id="strengthText">Password strength</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="registerConfirmPassword" class="form-label">Confirm Password</label>
+                        <div class="input-wrapper">
+                            <input 
+                                type="password" 
+                                id="registerConfirmPassword" 
+                                name="confirmPassword" 
+                                class="form-input" 
+                                placeholder="Re-enter your password"
+                                autocomplete="new-password"
+                                required
+                            >
+                            <span class="input-icon">
+                                <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                    <path d="M9 11L11 13L15 9M5 9V6C5 3.79086 6.79086 2 9 2H11C13.2091 2 15 3.79086 15 6V9M4 9H16C17.1046 9 18 9.89543 18 11V16C18 17.1046 17.1046 18 16 18H4C2.89543 18 2 17.1046 2 16V11C2 9.89543 2.89543 9 4 9Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </span>
+                        </div>
+                        <span class="error-message" id="registerConfirmPasswordError"></span>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" id="registerBtn">
+                        <span class="btn-text">Create Account</span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg class="spinner" width="20" height="20" viewBox="0 0 20 20">
+                                <circle cx="10" cy="10" r="8" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-dasharray="40" stroke-dashoffset="10"/>
+                            </svg>
+                        </span>
+                    </button>
+                </form>
+
+                <div class="card-footer">
+                    <p class="footer-text">Already have an account? <a href="#" class="link" id="goToLogin">Sign In</a></p>
+                </div>
+            </div>
+
+            <div class="security-badge">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M8 1L14 3V8C14 11.5 11.5 14 8 15C4.5 14 2 11.5 2 8V3L8 1Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    <path d="M6 8L7.5 9.5L10 6.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                <span>256-bit SSL Encrypted</span>
+            </div>
+        </div>
+
+        <!-- Dashboard Page -->
+        <div class="page" id="dashboardPage">
+            <div class="dashboard-container">
+                <header class="dashboard-header">
+                    <div class="header-content">
+                        <div class="logo-section-small">
+                            <div class="logo-icon-small">
+                                <svg width="32" height="32" viewBox="0 0 40 40" fill="none">
+                                    <path d="M20 0L40 10V30L20 40L0 30V10L20 0Z" fill="url(#logoGradient3)"/>
+                                    <path d="M20 10L30 15V25L20 30L10 25V15L20 10Z" fill="white" opacity="0.2"/>
+                                    <defs>
+                                        <linearGradient id="logoGradient3" x1="0" y1="0" x2="40" y2="40">
+                                            <stop offset="0%" stop-color="#00f5d4"/>
+                                            <stop offset="100%" stop-color="#00bbf9"/>
+                                        </linearGradient>
+                                    </defs>
+                                </svg>
+                            </div>
+                            <span class="logo-text-small">ASTRA DYNE</span>
+                        </div>
+                        <div class="header-actions">
+                            <div class="user-info">
+                                <div class="user-avatar" id="userAvatar">
+                                    <span id="userInitials"></span>
+                                </div>
+                                <div class="user-details">
+                                    <span class="user-name" id="userName"></span>
+                                    <span class="user-email" id="userEmail"></span>
+                                </div>
+                            </div>
+                            <button class="btn btn-secondary" id="logoutBtn">
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <path d="M7 13L11 9L7 5M11 9H1M11 1H14C15.6569 1 17 2.34315 17 4V14C17 15.6569 15.6569 17 14 17H11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                Logout
+                            </button>
+                        </div>
+                    </div>
+                </header>
+
+                <main class="dashboard-main">
+                    <div class="welcome-section">
+                        <h1 class="welcome-title">Welcome back, <span id="welcomeName"></span></h1>
+                        <p class="welcome-subtitle">Access granted. Your session is secure and encrypted.</p>
+                    </div>
+
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-icon stat-success">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Account Status</h3>
+                                <p class="stat-value">Active & Verified</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon stat-info">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Last Login</h3>
+                                <p class="stat-value" id="lastLogin">Just now</p>
+                            </div>
+                        </div>
+
+                        <div class="stat-card">
+                            <div class="stat-icon stat-warning">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                    <path d="M12 2L2 7V13C2 18 6 21.5 12 23C18 21.5 22 18 22 13V7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                            </div>
+                            <div class="stat-content">
+                                <h3 class="stat-label">Security Level</h3>
+                                <p class="stat-value">High Protection</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="info-section">
+                        <div class="info-card">
+                            <h2 class="info-title">Session Information</h2>
+                            <div class="info-grid">
+                                <div class="info-item">
+                                    <span class="info-label">Session ID:</span>
+                                    <span class="info-value" id="sessionId">Loading...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">IP Address:</span>
+                                    <span class="info-value" id="ipAddress">Loading...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Browser:</span>
+                                    <span class="info-value" id="browserInfo">Loading...</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Session Expires:</span>
+                                    <span class="info-value" id="sessionExpiry">Loading...</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="info-card">
+                            <h2 class="info-title">Security Features</h2>
+                            <ul class="security-list">
+                                <li class="security-item">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M7 10L9 12L13 8" stroke="#00f5d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>End-to-end encryption enabled</span>
+                                </li>
+                                <li class="security-item">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M7 10L9 12L13 8" stroke="#00f5d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>CSRF protection active</span>
+                                </li>
+                                <li class="security-item">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M7 10L9 12L13 8" stroke="#00f5d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>XSS prevention implemented</span>
+                                </li>
+                                <li class="security-item">
+                                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                                        <path d="M7 10L9 12L13 8" stroke="#00f5d4" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <span>Rate limiting configured</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
